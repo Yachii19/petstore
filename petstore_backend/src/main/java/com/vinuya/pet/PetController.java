@@ -93,16 +93,10 @@ public class PetController {
 
     // Get pets that contains key in name, species, breed, gender, image, description and price
     @GetMapping(path = "/pets/search/{key}")
-    public @ResponseBody Object searchPets(@PathVariable String key) {
-        List<Pet> matchingCars = petRepository.findByNameIgnoreCaseContainingOrSpeciesIgnoreCaseContainingOrBreedIgnoreCaseContainingOrGenderIgnoreCaseContainingOrImageIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(
+    public @ResponseBody List<Pet> searchPets(@PathVariable String key) {
+        return petRepository.findByNameIgnoreCaseContainingOrSpeciesIgnoreCaseContainingOrBreedIgnoreCaseContainingOrGenderIgnoreCaseContainingOrImageIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(
                 key, key, key, key, key, key
         );
-
-        if (!matchingCars.isEmpty()) {
-            return matchingCars;
-        } else {
-            return "Empty";
-        }
     }
 
     @GetMapping(path = "/pets/search/price/{price}")
